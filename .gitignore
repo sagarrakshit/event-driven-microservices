@@ -1,0 +1,14 @@
+# dependencies
+node_modules/
+
+# environment files
+.env
+.env.docker
+
+# logs
+logs/
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db
