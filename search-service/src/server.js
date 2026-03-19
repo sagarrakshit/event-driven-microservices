@@ -15,17 +15,14 @@ import messageRouter from "./events/messageRouter.js";
 const app = express();
 const PORT = process.env.PORT || 3004;
 
-mongoose
-  .connect(process.env.MONGODB_URL)
-  .then(() => logger.info("Mongodb is connected"))
-  .catch((e) => logger.error("Error connecting to mongodb", e));
-
 app.use(cors());
 app.use(helmet());
 app.use(express.json());
 
 const startServer = async () => {
   try {
+    await mongoose.connect(process.env.MONGODB_URL);
+    logger.info("Mongodb is connected");
     // start the consumers
     await connectConsumer();
     await subscribeToTopic("post.created");
